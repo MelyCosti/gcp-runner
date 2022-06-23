@@ -157,7 +157,7 @@ function start_vm {
     cd /actions-runner 
     ./config.cmd --url https://github.com/${GITHUB_REPOSITORY} --token ${RUNNER_TOKEN} --labels ${VM_ID} --unattended ${ephemeral_flag} --disableupdate
     Start-Process -FilePath "run.cmd"
-    gcloud compute instances add-labels ${VM_ID} --zone=${machine_zone} --labels=gh_ready=1
+    gcloud compute instances add-labels ${VM_ID} --zone=${machine_zone} --labels=github_ready=1
     # 3 days represents the max workflow runtime. This will shutdown the instance if everything else fails.
     echo \"gcloud --quiet compute instances delete ${VM_ID} --zone=${machine_zone}\" | at now + 3 days
     echo "toto" > ./toto.txt
@@ -195,7 +195,7 @@ function start_vm {
   while (( i++ < 60 )); do
     GH_STATE=$(gcloud compute instances describe ${VM_ID} --zone=${machine_zone} --format='json(labels)')
     echo $GH_STATE
-    GH_READY=$(gcloud compute instances describe ${VM_ID} --zone=${machine_zone} --format='json(labels)' | jq -r .labels.gh_ready)
+    GH_READY=$(gcloud compute instances describe ${VM_ID} --zone=${machine_zone} --format='json(labels)' | jq -r .labels.github_ready)
     if [[ $GH_READY == 1 ]]; then
       break
     fi
