@@ -135,11 +135,11 @@ function start_vm {
   fi
 
   RUNNER_TOKEN=$(curl -X POST \
-      -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+      -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${token}" \
       https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runners/registration-token |\
       jq -r .token)
   echo "✅ Successfully got the GitHub Runner registration token"
-  curl -X POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runners/registration-token
+  curl -X POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${token}" https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runners/registration-token
   
   VM_ID="genesis-build-runner-${GITHUB_RUN_ID}-${RANDOM}"
   service_account_flag=$([[ -z "${runner_service_account}" ]] || echo "--service-account=${runner_service_account}")
