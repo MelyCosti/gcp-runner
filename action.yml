@@ -53,7 +53,7 @@ inputs:
   image_family:
     description: The image family for the operating system that the boot disk will be initialized with.
     required: false
-  image_template:
+  source-instance-template:
     description: The image template for the operating system that the boot disk will be initialized with.
     required: false  
   preemptible:
