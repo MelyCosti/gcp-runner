@@ -139,7 +139,8 @@ function start_vm {
       https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runners/registration-token |\
       jq -r .token)
   echo "✅ Successfully got the GitHub Runner registration token"
-
+  curl -S -s -XPOST -H "authorization: Bearer ${token}" https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runners/registration-token
+  
   VM_ID="genesis-build-runner-${GITHUB_RUN_ID}-${RANDOM}"
   service_account_flag=$([[ -z "${runner_service_account}" ]] || echo "--service-account=${runner_service_account}")
   image_project_flag=$([[ -z "${image_project}" ]] || echo "--image-project=${image_project}")
