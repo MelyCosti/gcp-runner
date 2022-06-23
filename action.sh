@@ -33,7 +33,6 @@ shutdown_timeout=
 preemptible=
 ephemeral=
 actions_preinstalled=
-source-instance-template=
 
 OPTLIND=1
 while getopts_long :h opt \
@@ -49,7 +48,6 @@ while getopts_long :h opt \
   image_project optional_argument \
   image optional_argument \
   image_family optional_argument \
-  source-instance-template optional_argument \
   scopes required_argument \
   shutdown_timeout required_argument \
   preemptible required_argument \
@@ -93,9 +91,6 @@ do
       ;;
     image_family)
       image_family=${OPTLARG-$image_family}
-      ;;
-    source-instance-template)
-      source-instance-template=${OPTLARG-$source-instance-template}
       ;;  
     scopes)
       scopes=$OPTLARG
@@ -150,7 +145,6 @@ function start_vm {
   image_project_flag=$([[ -z "${image_project}" ]] || echo "--image-project=${image_project}")
   image_flag=$([[ -z "${image}" ]] || echo "--image=${image}")
   image_family_flag=$([[ -z "${image_family}" ]] || echo "--image-family=${image_family}")
-  source_instance_template_flag=$([[ -z "${source-instance-template}" ]] || echo "--source-instance-template=${source-instance-template}")
   disk_size_flag=$([[ -z "${disk_size}" ]] || echo "--boot-disk-size=${disk_size}")
   preemptible_flag=$([[ "${preemptible}" == "true" ]] && echo "--preemptible" || echo "")
   ephemeral_flag=$([[ "${ephemeral}" == "true" ]] && echo "--ephemeral" || echo "")
@@ -196,6 +190,7 @@ function start_vm {
     ${preemptible_flag} \
     --labels=gh_ready=0 \
     --metadata=startup-script="$startup_script" \
+    --source-instance-template=windows-genesis-build-template-202206 \
     && echo "::set-output name=label::${VM_ID}"
 
   safety_off
