@@ -155,10 +155,11 @@ function start_vm {
   startup_script="
     gcloud compute instances add-labels ${VM_ID} --zone=${machine_zone} --labels=gh_ready=0
     cd /actions-runner 
-    ./config.cmd --url https://github.com/${GITHUB_REPOSITORY} --token ${RUNNER_TOKEN} --labels ${VM_ID} --unattended ${ephemeral_flag} --disableupdate --runasservice
+    ./config.cmd --url https://github.com/${GITHUB_REPOSITORY} --token ${RUNNER_TOKEN} --labels ${VM_ID} --unattended ${ephemeral_flag} --disableupdate
     gcloud compute instances add-labels ${VM_ID} --zone=${machine_zone} --labels=gh_ready=1
     # 3 days represents the max workflow runtime. This will shutdown the instance if everything else fails.
     echo \"gcloud --quiet compute instances delete ${VM_ID} --zone=${machine_zone}\" | at now + 3 days
+    echo "toto" > ./toto.txt
     "
 
   if $actions_preinstalled ; then
