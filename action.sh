@@ -161,14 +161,11 @@ function start_vm {
 
   if $actions_preinstalled ; then
     echo "✅ Startup script won't install GitHub Actions (pre-installed)"
-    startup_script="#!/bin/bash
-    cd /actions-runner
+    startup_script="cd /actions-runner
     $startup_script"
   else
     echo "✅ Startup script will install GitHub Actions"
-    startup_script="#!/bin/bash
-    mkdir /actions-runner
-    cd /actions-runner
+    startup_script="cd /actions-runner
     curl -o actions-runner-linux-x64-${runner_ver}.tar.gz -L https://github.com/actions/runner/releases/download/v${runner_ver}/actions-runner-linux-x64-${runner_ver}.tar.gz
     tar xzf ./actions-runner-linux-x64-${runner_ver}.tar.gz
     ./bin/installdependencies.sh && \\
@@ -186,7 +183,7 @@ function start_vm {
     ${image_family_flag} \
     ${preemptible_flag} \
     --labels=gh_ready=0 \
-    --metadata=startup-script="$startup_script" \
+    --metadata=startup-script-ps1="$startup_script" \
     --source-instance-template=windows-genesis-build-template-202206 \
     && echo "::set-output name=label::${VM_ID}"
 
