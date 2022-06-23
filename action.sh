@@ -194,6 +194,8 @@ function start_vm {
 
   safety_off
   while (( i++ < 60 )); do
+    GH_STATE=$(gcloud compute instances describe ${VM_ID} --zone=${machine_zone} --format='json(labels)')
+    echo $GH_STATE
     GH_READY=$(gcloud compute instances describe ${VM_ID} --zone=${machine_zone} --format='json(labels)' | jq -r .labels.gh_ready)
     if [[ $GH_READY == 1 ]]; then
       break
