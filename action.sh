@@ -95,7 +95,7 @@ do
       image_family=${OPTLARG-$image_family}
       ;;
     source-instance-template)
-      source-instance-template=${OPTLARG-$image_template}
+      source-instance-template=${OPTLARG-$source-instance-template}
       ;;  
     scopes)
       scopes=$OPTLARG
