@@ -192,7 +192,7 @@ function start_vm {
     ${image_project_flag} \
     ${image_flag} \
     ${image_family_flag} \
-    ${source-instance-template} \
+    ${source-instance-template_flag} \
     ${preemptible_flag} \
     --labels=gh_ready=0 \
     --metadata=startup-script="$startup_script" \
