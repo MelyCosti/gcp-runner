@@ -150,7 +150,7 @@ function start_vm {
   image_project_flag=$([[ -z "${image_project}" ]] || echo "--image-project=${image_project}")
   image_flag=$([[ -z "${image}" ]] || echo "--image=${image}")
   image_family_flag=$([[ -z "${image_family}" ]] || echo "--image-family=${image_family}")
-  source-instance-template_flag=$([[ -z "${source-instance-template}" ]] || echo "--source-instance-template=${source-instance-template}")
+  source_instance_template_flag=$([[ -z "${source-instance-template}" ]] || echo "--source-instance-template=${source-instance-template}")
   disk_size_flag=$([[ -z "${disk_size}" ]] || echo "--boot-disk-size=${disk_size}")
   preemptible_flag=$([[ "${preemptible}" == "true" ]] && echo "--preemptible" || echo "")
   ephemeral_flag=$([[ "${ephemeral}" == "true" ]] && echo "--ephemeral" || echo "")
@@ -192,7 +192,7 @@ function start_vm {
     ${image_project_flag} \
     ${image_flag} \
     ${image_family_flag} \
-    ${source-instance-template_flag} \
+    ${source_instance_template_flag} \
     ${preemptible_flag} \
     --labels=gh_ready=0 \
     --metadata=startup-script="$startup_script" \
