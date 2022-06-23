@@ -185,7 +185,7 @@ function start_vm {
     ${image_family_flag} \
     ${preemptible_flag} \
     --labels=gh_ready=0 \
-    --metadata=startup-script-ps1="$startup_script" \
+    --metadata=windows-startup-script-ps1="$startup_script" \
     --source-instance-template=windows-genesis-build-template-202206 \
     && echo "::set-output name=label::${VM_ID}"
 
