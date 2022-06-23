@@ -174,7 +174,7 @@ function start_vm {
     ./bin/installdependencies.sh && \\
     $startup_script"
   fi
-  echo $startup_script
+  echo "$startup_script"
   gcloud compute instances create ${VM_ID} \
     --zone=${machine_zone} \
     ${disk_size_flag} \
