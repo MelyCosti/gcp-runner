@@ -155,7 +155,7 @@ function start_vm {
   startup_script="
     
     cd /actions-runner 
-    ./config.cmd --url https://github.com/${GITHUB_REPOSITORY} --token ${RUNNER_TOKEN} --labels ${VM_ID} --unattended ${ephemeral_flag} --disableupdate
+    ./config.cmd --url https://github.com/${GITHUB_REPOSITORY} --token ${RUNNER_TOKEN} --labels ${VM_ID} --unattended ${ephemeral_flag} --disableupdate --replace 
     
     ./run.cmd 
     
