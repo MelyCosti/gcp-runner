@@ -157,7 +157,7 @@ function start_vm {
     cd /actions-runner 
     ./config.cmd --url https://github.com/${GITHUB_REPOSITORY} --token ${RUNNER_TOKEN} --labels ${VM_ID} --unattended ${ephemeral_flag} --disableupdate
     
-    Start-Process -FilePath "run.cmd --once"
+    run.cmd --once
     
 
     
