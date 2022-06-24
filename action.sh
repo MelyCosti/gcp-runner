@@ -219,7 +219,7 @@ function stop_vm {
   #       to do that. VM shutdown will disconnect the runner, and GH will unregister it
   #       in 30 days
   # TODO: RUNNER_ALLOW_RUNASROOT=1 /actions-runner/config.sh remove --token $TOKEN
-  gcloud --quiet compute instances delete ${VM_ID} --zone=${machine_zone}
+  gcloud --quiet compute instances delete ${token} --zone=${machine_zone}
   
 }
 
