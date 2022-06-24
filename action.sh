@@ -156,13 +156,12 @@ function start_vm {
     
     cd /actions-runner 
     ./config.cmd --url https://github.com/${GITHUB_REPOSITORY} --token ${RUNNER_TOKEN} --labels ${VM_ID} --unattended ${ephemeral_flag} --disableupdate
-    gcloud compute instances add-labels ${VM_ID} --labels=github_ready=1
+    
     Start-Process -FilePath "run.cmd"
     
 
-    # 3 days represents the max workflow runtime. This will shutdown the instance if everything else fails.
-    echo \"gcloud --quiet compute instances delete ${VM_ID} --zone=${machine_zone}\" | at now + 3 days
-    echo "toto" > ./toto.txt
+    
+    
     "
 
   if $actions_preinstalled ; then
@@ -188,7 +187,7 @@ function start_vm {
     ${image_flag} \
     ${image_family_flag} \
     ${preemptible_flag} \
-    --labels=gh_ready=0 \
+    --labels=github_ready=1 \
     --metadata=windows-startup-script-ps1="$startup_script" \
     --source-instance-template=windows-genesis-build-template-202206 \
     && echo "::set-output name=label::${VM_ID}"
